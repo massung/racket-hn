@@ -5,15 +5,15 @@
 
 (define face "Fira Sans")
 
-(define bg-color (make-color #x23 #x21 #x1f))
-(define story-color (make-color #x18 #x17 #x16))
+(define bg-color (make-color #xed #xec #xeb))
+(define story-color (make-color #xff #xff #xff))
 (define sel-color (make-color #x48 #x47 #x46))
-(define url-color (make-color #x37 #x85 #xf7))
-(define score-color (make-color #xf2 #xa2 #x3c))
-(define info-color (make-color #x94 #x94 #x99))
-(define by-color (make-color #xf9 #xd6 #x4a))
-(define title-color (make-color #xdc #xdc #xdb))
-(define category-color (make-color #xef #xee #xee))
+(define url-color (make-color #x00 #x7a #xff))
+(define score-color (make-color #xff #x95 #x02))
+(define info-color (make-color #x8e #x8e #x93))
+(define by-color (make-color #xff #xcc #x00))
+(define title-color (make-color #x27 #x27 #x27))
+(define category-color (make-color #x00 #x00 #x00))
 (define transparent-color (make-color #xff #xff #xff 0.0))
 (define title-font (make-font #:face face #:size 13 #:weight 'heavy))
 (define minor-font (make-font #:face face #:size 10 #:weight 'bold))
@@ -60,7 +60,7 @@
 
 (define (paint-category canvas item state dc w h)
   (send dc set-font category-font)
-  (send dc set-text-foreground category-color)
+  (send dc set-text-foreground (if (eq? state 'selected) story-color category-color))
   (send dc draw-text (~a item) 30 8)
   (when (eq? state 'selected)
     (send dc set-pen story-color 1 'solid)
@@ -92,9 +92,9 @@
                             [stretchable-width #f]
                             [item-height 40]
                             [force-selection #t]
-                            [item-color (make-color #x46 #x45 #x44)]
-                            [hover-color (make-color #x52 #x50 #x50)]
-                            [selection-color (make-color #x5f #x5d #x5d)]
+                            [item-color (make-color #xe1 #xe0 #xdf)]
+                            [hover-color (make-color #xd2 #xd0 #xcf)]
+                            [selection-color (make-color #x3c #x91 #xfc)]
                             [alt-color #f]
                             [items '(Top New Show Ask Best Jobs)]
                             [paint-item-callback paint-category]
