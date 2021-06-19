@@ -2,6 +2,8 @@
 
 This is a simple HN reader written in [Racket][racket]. It uses the [canvas-list][canvas-list] control as a dependency.
 
+![](https://raw.githubusercontent.com/massung/racket-canvas-list/master/images/hn.png)
+
 For the style and color scheme I drew _heavy_ inspiration from [@mattrighetti's HNReaderApp][mattrighetti]. His looks fantastic and I highly recommend taking a look!
 
 [racket]: https://racket-lang.org
