@@ -114,6 +114,12 @@
                                                              [y (send event get-y)])
                                                          (send canvas popup-menu context-menu x y)))])]
            [context-menu (new popup-menu% [title "Story"])]
+           [open-mi (new menu-item%
+                         [parent context-menu]
+                         [label "Open Story..."]
+                         [callback (λ (item event)
+                                     (let ([story (send story-list get-selected-item)])
+                                       (open-item story-list story #f)))])]
            [comment-mi (new menu-item%
                             [parent context-menu]
                             [label "Open Comments..."]
