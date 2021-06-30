@@ -19,6 +19,8 @@
 (define minor-font (make-font #:face face #:size 10 #:weight 'bold))
 (define category-font (make-font #:face face #:size 14 #:weight 'bold))
 
+(define y-news (read-bitmap "y.png"))
+
 (define (open-item canvas item event)
   (send-url (story-url item)))
 
@@ -68,14 +70,14 @@
     (send dc set-pen title-color 1 'solid)
     (send dc draw-line 0 0 w 0)))
 
-(define (select-category story-list item)
+(define (select-category story-list item #:force [force #f])
   (let-values ([(stories ids) (match item
-                                ['Top (top-stories)]
-                                ['New (new-stories)]
-                                ['Show (show-stories)]
-                                ['Ask (ask-stories)]
-                                ['Best (best-stories)]
-                                ['Jobs (job-stories)])])
+                                ['Top (top-stories #:force force)]
+                                ['New (new-stories #:force force)]
+                                ['Show (show-stories #:force force)]
+                                ['Ask (ask-stories #:force force)]
+                                ['Best (best-stories #:force force)]
+                                ['Jobs (job-stories #:force force)])])
     (send story-list set-items (vector-filter identity stories))))
 
 (define (launch)
@@ -131,12 +133,13 @@
                             [label "Refresh Stories"]
                             [callback (λ (item event)
                                         (let ([cat (send categories get-selected-item)])
-                                          (select-category story-list cat)))])]
+                                          (select-category story-list cat #:force #t)))])]
            [more-mi (new menu-item%
                          [parent context-menu]
                          [label "Load More"]
                          [callback (λ (item event)
                                      (void))])])
+    (send frame set-icon y-news)
     (send frame show #t)
     (send categories select-first)))
 
